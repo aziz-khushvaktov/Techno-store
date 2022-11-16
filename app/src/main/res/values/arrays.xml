@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="brand">
+        <item>
+            Samsung
+        </item>
+        <item>
+            Iphone
+        </item>
+        <item>
+            Xiaomi
+        </item>
+    </string-array>
+
+    <string-array name="price">
+        <item>
+            $300 - $500
+        </item>
+        <item>
+            $500 - $700
+        </item>
+        <item>
+            $700 - $1000
+        </item>
+    </string-array>
+
+    <string-array name="size">
+        <item>
+            4.5 to 5.5 inches
+        </item>
+        <item>
+            5.5 to 6.5 inches
+        </item>
+        <item>
+            6.5 to 7.0 inches
+        </item>
+    </string-array>
+</resources>

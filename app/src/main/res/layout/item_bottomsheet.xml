@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    app:cardCornerRadius="20dp"
+    android:layout_marginTop="10dp"
+    android:elevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginEnd="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+<!--            Image cancel-->
+            <LinearLayout
+                android:id="@+id/ll_cancel"
+                android:gravity="center"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:background="@drawable/view_dark_blue">
+
+                <ImageView
+                    android:id="@+id/ic_cancel"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:src="@mipmap/ic_cancel"
+                    android:adjustViewBounds="true"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="@string/str_filter_options"
+                android:textColor="@color/dark_blue"
+                android:textSize="18sp"
+                />
+
+            <Button
+                android:id="@+id/b_done"
+                android:layout_width="wrap_content"
+                android:layout_height="37dp"
+                android:text="@string/str_done"
+                android:textColor="@color/white"
+                android:background="@drawable/view_brown_rounded"
+                android:textSize="18sp"
+                android:textAllCaps="false"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="46dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_brand"
+            android:textColor="@color/dark_blue"
+            android:textStyle="normal"
+            android:textSize="18sp"/>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/view_spinner"
+            android:layout_marginStart="46dp"
+            android:padding="5dp"
+            android:layout_marginEnd="31dp">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/sp_brand"
+                android:entries="@array/brand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/str_price"
+            android:layout_marginStart="46dp"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            android:textColor="@color/dark_blue"/>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/view_spinner"
+            android:layout_marginStart="46dp"
+            android:padding="5dp"
+            android:layout_marginEnd="31dp">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/sp_price"
+                android:entries="@array/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/str_size"
+            android:layout_marginStart="46dp"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            android:textColor="@color/dark_blue"/>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/view_spinner"
+            android:layout_marginStart="46dp"
+            android:padding="5dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="31dp">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/sp_size"
+                android:entries="@array/size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

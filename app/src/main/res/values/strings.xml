@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Techno Store</string>
+
+    <string name="str_explorer">• Explorer</string>
+    <string name="str_store">Store</string>
+    <string name="str_favourite">Favourite</string>
+    <string name="str_profile">Profile</string>
+    <string name="str_ecommerce">Ecommerce \n Concept</string>
+    <string name="str_select_category">Select category</string>
+    <string name="str_view_all">view all</string>
+    <string name="str_phones">Phones</string>
+    <string name="str_computer">Computer</string>
+    <string name="str_health">Health</string>
+    <string name="str_books">Books</string>
+    <string name="str_search">Search</string>
+    <string name="str_gadgets">Gadgets</string>
+    <string name="str_hot_sales">Hot sales</string>
+    <string name="str_see_more">see more</string>
+    <string name="str_best_seller">Best Seller</string>
+    <string name="str_new">New</string>
+    <string name="str_buy_now">Buy now!</string>
+    <string name="str_filter_options">Filter options</string>
+    <string name="str_done">Done</string>
+    <string name="str_brand">Brand</string>
+    <string name="str_price">Price</string>
+    <string name="str_size">Size</string>
+    <string name="str_iphone">Iphone</string>
+    <string name="str_samsung">Samsung</string>
+    <string name="str_xiaomi">Xiaomi</string>
+    <string name="str_iphone12">Iphone 12</string>
+    <string name="str_super_mega">Super.Mega.Rapido.</string>
+    <string name="str_product_det">Product details</string>
+    <string name="str_select_color">Select color and capacity</string>
+    <string name="str_add_cart">Add to Cart</string>
+    <string name="str_shop">Shop</string>
+    <string name="str_details">Details</string>
+    <string name="features">Features</string>
+   <string name="str_add_address">Add address</string>
+    <string name="str_my_cart">My Cart</string>
+    <string name="str_total">Total</string>
+    <string name="str_delivery">Delivery</string>
+    <string name="str_checkout">Checkout</string>
+
+</resources>
