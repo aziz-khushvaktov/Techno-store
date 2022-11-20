@@ -1,7 +1,9 @@
 package ru.technostore.fragment
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,8 +17,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
 import com.bumptech.glide.Glide
+import com.bumptech.glide.util.ExceptionPassthroughInputStream
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
+import ru.technostore.MainActivity
 import ru.technostore.R
 import ru.technostore.adapter.BestSellerAdapter
 import ru.technostore.adapter.CategoryAdapter
@@ -25,7 +29,9 @@ import ru.technostore.databinding.FragmentHomeBinding
 import ru.technostore.databinding.ItemCategoryViewBinding
 import ru.technostore.model.Category
 import ru.technostore.model.HomeStore
+import ru.technostore.utils.ConnectivityReceiver
 import ru.technostore.utils.PaddingItemDecoration
+import ru.technostore.utils.Utils
 import ru.technostore.viewmodel.HomeViewModel
 
 @AndroidEntryPoint
@@ -48,6 +54,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initViews() {
+
         setUpCategoryRecycler()
 
         setUpBestSellerRecycler()
@@ -57,8 +64,11 @@ class HomeFragment : Fragment() {
         binding.llQrCode.setOnClickListener {
            manageBottomSheetDialog()
         }
-    }
 
+        binding.tvSeeMore.setOnClickListener { Utils.inProcess(requireContext()) }
+        binding.tvSeeMore2.setOnClickListener { Utils.inProcess(requireContext()) }
+        binding.tvViewAll.setOnClickListener { Utils.inProcess(requireContext()) }
+    }
     private fun getAllCategories(): ArrayList<Category> {
         val categories = ArrayList<Category>()
         categories.add(Category(R.drawable.ic_baseline_smartphone_black,
@@ -114,12 +124,15 @@ class HomeFragment : Fragment() {
             }
 
         })
-
-        homeViewModel.apiGetAllMainData()
-        homeViewModel.mainRes.observe(requireActivity()) {
-            bestSellerAdapter.submitList(it!!.bestSeller)
-            Log.d("bestSeller", it.bestSeller.toString())
+        try {
+            homeViewModel.apiGetAllMainData()
+            homeViewModel.mainRes.observe(requireActivity()) {
+                bestSellerAdapter.submitList(it!!.bestSeller)
+            }
+        }catch (e: Exception) {
+            e.printStackTrace()
         }
+
         binding.rvBestSeller.adapter = bestSellerAdapter
     }
 
@@ -137,7 +150,6 @@ class HomeFragment : Fragment() {
             homeStoreAdapter.submitList(it!!.homeStore)
         }
 
-        binding.rvHomeStore.addItemDecoration(PaddingItemDecoration(20))
 
         binding.rvHomeStore.adapter = homeStoreAdapter
 
@@ -162,4 +174,5 @@ class HomeFragment : Fragment() {
         bottomSheetDialog.setContentView(viewDialog)
         bottomSheetDialog.show()
     }
+
 }

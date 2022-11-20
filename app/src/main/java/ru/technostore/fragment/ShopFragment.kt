@@ -10,10 +10,12 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.util.Util
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_shop.*
 import ru.technostore.R
 import ru.technostore.databinding.FragmentShopBinding
+import ru.technostore.utils.Utils
 import ru.technostore.viewmodel.ProductViewModel
 
 @AndroidEntryPoint
@@ -53,21 +55,30 @@ class ShopFragment : Fragment() {
             changeBackgroundColorOfSecondCapacityButton()
         }
 
+        binding.llAddToCart.setOnClickListener {
+            Utils.inProcess(requireContext())
+        }
+
     }
 
     @SuppressLint("SetTextI18n")
     private fun setDateFromAPI() {
-        productViewModel.getProductResponseList()
-        productViewModel.productResponseList.observe(requireActivity()) {
-            binding.tvCamera.text = it?.camera
-            binding.tvSsd.text = it?.ssd
-            binding.tvSd.text = it?.sd
-            binding.tvCapacity1.text = it?.capacity!![0] + " GB"
-            binding.tvCapacity2.text = it.capacity[1] + " GB"
-            binding.tvPrice.text = it.price.toString() + ".00"
-            binding.llColor1.background.setTint(Color.parseColor(it.color!![0]))
-            binding.llColor2.background.setTint(Color.parseColor(it.color[1]))
+        try {
+            productViewModel.getProductResponseList()
+            productViewModel.productResponseList.observe(requireActivity()) {
+                binding.tvCamera.text = it?.camera
+                binding.tvSsd.text = it?.ssd
+                binding.tvSd.text = it?.sd
+                binding.tvCapacity1.text = it?.capacity!![0] + " GB"
+                binding.tvCapacity2.text = it.capacity[1] + " GB"
+                binding.tvPrice.text = it.price.toString() + ".00"
+                binding.llColor1.background.setTint(Color.parseColor(it.color!![0]))
+                binding.llColor2.background.setTint(Color.parseColor(it.color[1]))
+            }
+        }catch (e: Exception) {
+            e.printStackTrace()
         }
+
     }
 
     private fun changeBackgroundColorOfFirstCapacityButton() {

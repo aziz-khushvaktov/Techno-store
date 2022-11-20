@@ -29,12 +29,12 @@ class SplashFragment : Fragment() {
     }
 
     private fun countDownTimer() {
-        object : CountDownTimer(20,20) {
+        object : CountDownTimer(2000,2000) {
             override fun onTick(p0: Long) {
-
             }
 
             override fun onFinish() {
+                findNavController().popBackStack(R.id.splashFragment,true)
                 findNavController().navigate(R.id.homeFragment)
             }
         }.start()

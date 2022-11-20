@@ -4,7 +4,7 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class PaddingItemDecoration(private var size: Int): RecyclerView.ItemDecoration() {
+class PaddingItemDecoration(private var margin: Int, private val columns: Int): RecyclerView.ItemDecoration() {
 
 
     override fun getItemOffsets(
@@ -15,9 +15,12 @@ class PaddingItemDecoration(private var size: Int): RecyclerView.ItemDecoration(
     ) {
         super.getItemOffsets(outRect, view, parent, state)
         // Apply offset only to first item
-        if(parent.getChildAdapterPosition(view) >= 0) {
-            outRect.left += size
+        val position = parent.getChildLayoutPosition(view)
+        // set right margin to all
+        if(position == 0 || position == 1 || position == 2) {
+            outRect.right += margin
+            // set left margin to all
+            //outRect.left += margin
         }
-
     }
 }

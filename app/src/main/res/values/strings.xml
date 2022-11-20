@@ -5,7 +5,7 @@
     <string name="str_store">Store</string>
     <string name="str_favourite">Favourite</string>
     <string name="str_profile">Profile</string>
-    <string name="str_ecommerce">Ecommerce \n Concept</string>
+    <string name="str_ecommerce">Ecommerce \nConcept</string>
     <string name="str_select_category">Select category</string>
     <string name="str_view_all">view all</string>
     <string name="str_phones">Phones</string>
@@ -40,5 +40,7 @@
     <string name="str_total">Total</string>
     <string name="str_delivery">Delivery</string>
     <string name="str_checkout">Checkout</string>
+    <string name="str_in_process">In process…</string>
+    <string name="check_connection">Check connection</string>
 
 </resources>

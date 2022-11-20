@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val mainService: MainService): ViewModel() {
 
-    val mainRes = MutableLiveData<Main?>()
+   val mainRes = MutableLiveData<Main?>()
 
     fun apiGetAllMainData() {
         mainService.getListOfMain().enqueue(object : Callback<Main> {

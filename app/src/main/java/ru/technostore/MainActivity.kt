@@ -1,33 +1,34 @@
 package ru.technostore
 
+import android.app.Dialog
+import android.content.BroadcastReceiver
+import android.content.IntentFilter
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
-import android.widget.FrameLayout
 import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.internal.BaselineLayout
-import dagger.Module
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
-import dagger.hilt.components.SingletonComponent
-import iwir.oerit.bottomnav.ext.SmoothBottomBar
 import ru.technostore.databinding.ActivityMainBinding
+import ru.technostore.utils.ConnectivityObserver
+import ru.technostore.utils.ConnectivityReceiver
+import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity @Inject constructor(): AppCompatActivity() {
+class MainActivity @Inject constructor(): AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverListener {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     lateinit var navController: NavController
     lateinit var navHostFragment: NavHostFragment
+
+    private var dialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +37,7 @@ class MainActivity @Inject constructor(): AppCompatActivity() {
     }
 
     private fun initViews() {
+
         navHostFragment = supportFragmentManager.findFragmentById(R.id.main_container) as NavHostFragment
         navController = navHostFragment.navController
         binding.bottomNavigation.setupWithNavController(navController)
@@ -47,9 +49,17 @@ class MainActivity @Inject constructor(): AppCompatActivity() {
                 R.id.splashFragment -> hideBottomNavigation()
                 R.id.homeFragment -> showBottomNavigation()
                 R.id.productDetailsFragment -> hideBottomNavigation()
+                R.id.cartFragment -> hideBottomNavigation()
             }
         }
+
     }
+
+    override fun onResume() {
+        super.onResume()
+        ConnectivityReceiver.connectivityReceiverListener = this@MainActivity
+    }
+
 
     private fun hideBottomNavigation() {
         binding.bottomNavigation.isVisible = false
@@ -59,23 +69,13 @@ class MainActivity @Inject constructor(): AppCompatActivity() {
         binding.bottomNavigation.isVisible = true
     }
 
+    override fun onNetworkConnectionChanged(isConnected: Boolean) {
+        showDialog(isConnected)
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return true
-    }
-
-    //set an active fragment programmatically
-    fun setSelectedItem(pos:Int){
-        binding.bottomNavigation.setSelectedItem(pos)
-    }
-    //set badge indicator
-    fun setBadge(pos:Int){
-        binding.bottomNavigation.setBadge(pos)
-    }
-    //remove badge indicator
-    fun removeBadge(pos:Int){
-        binding.bottomNavigation.removeBadge(pos)
     }
 
     private fun setupSmoothBottomMenu() {
@@ -88,5 +88,18 @@ class MainActivity @Inject constructor(): AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+
+    private fun showDialog(isConnected: Boolean) {
+        if (!isConnected) {
+            dialog = Dialog(this)
+            dialog?.setContentView(R.layout.dialog_check_connection)
+            dialog?.setCancelable(false)
+            dialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog?.show()
+        } else {
+            dialog?.dismiss()
+        }
     }
 }
